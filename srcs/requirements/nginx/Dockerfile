@@ -1,11 +1,12 @@
-FROM debian:buster
+FROM alpine:3.18
 
-RUN apt-get update -y
-RUN apt install -y nginx && apt install openssl -y
+RUN apk update && \
+		apk add nginx openssl && \
+	mkdir -p /run/nginx
 
-COPY ./conf/default /etc/nginx/sites-available/
-COPY ./tools/script.sh /
+RUN mkdir -p /etc/nginx/certs && \
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/certs/server.key -out /etc/nginx/certs/server.crt -subj "/CN=alkane.42.fr"
 
-RUN chmod +x script.sh
+COPY ./conf/nginx.conf /etc/nginx/http.d/default.conf
 
-CMD ["/script.sh"]
+CMD ["nginx", "-g", "daemon off;"]
