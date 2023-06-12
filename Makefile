@@ -5,6 +5,8 @@ up :
 
 down : 
 	@docker-compose -f ./srcs/docker-compose.yml down
+
+fclean :
 	-docker stop $$(docker ps -qa)
 	-docker rm $$(docker ps -qa)
 	-docker rmi -f $$(docker images -qa)
@@ -12,13 +14,12 @@ down :
 	-docker network rm $$(docker network ls -q) 2>/dev/null
 	-docker system prune -af
 
-# -sudo rm -rf /Users/alistair/data/mariadb/
-# -sudo rm -rf /Users/alistair/data/wordpress/
-# mkdir -p /Users/alistair/data/mariadb
-# mkdir -p /Users/alistair/data/wordpress
-#sudo chown -R $$USER:$$USER /Users/alistair/data/mariadb
-#sudo chown -R $$USER:$$USER /Users/alistair/data/wordpress
-
+	rm -drf /Users/alistair/data/mariadb
+	rm -drf /Users/alistair/data/wordpress
+	mkdir -p /Users/alistair/data/mariadb
+	mkdir -p /Users/alistair/data/wordpress
+	chmod 777 /Users/alistair/data/mariadb
+	chmod 777 /Users/alistair/data/wordpress
 
 stop : 
 	@docker-compose -f ./srcs/docker-compose.yml stop
