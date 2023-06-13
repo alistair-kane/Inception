@@ -7,12 +7,9 @@ fi
 
 cd /var/www/html
 
-#what is this for...?
-sleep 5
-
 wp core download --allow-root --version=5.8.1 --locale=en_US
 
-wp config create --allow-root --dbname=${WP_NAME} --dbuser=${WP_ADMIN_USER} --dbpass=${WP_PASSWORD} --dbhost=${WP_HOST}
+wp config create --allow-root --dbname=${MARIA_NAME} --dbuser=${MARIA_USER} --dbpass=${MARIA_PASSWORD} --dbhost=${WP_HOST}
 
 wp core install --allow-root --url=${WP_URL} --title=${WP_TITLE} --admin_user=${WP_ADMIN_USER} --admin_password=${WP_ADMIN_PASSWORD} --admin_email=${WP_ADMIN_EMAIL} --skip-email
 
