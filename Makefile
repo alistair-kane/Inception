@@ -16,10 +16,16 @@ fclean :
 
 	rm -drf /Users/alistair/data/mariadb
 	rm -drf /Users/alistair/data/wordpress
+	rm -drf /Users/alistair/data/site
+
 	mkdir -p /Users/alistair/data/mariadb
 	mkdir -p /Users/alistair/data/wordpress
+	mkdir -p /Users/alistair/data/site
+
 	chmod 777 /Users/alistair/data/mariadb
 	chmod 777 /Users/alistair/data/wordpress
+	chmod 777 /Users/alistair/data/site
+
 
 stop : 
 	@docker-compose -f ./srcs/docker-compose.yml stop
