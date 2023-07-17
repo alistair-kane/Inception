@@ -5,10 +5,13 @@ RUN apk update && \
 
 COPY ./conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
 
-RUN adduser -D -h /var/ftp ftp_user && \
-    echo "ftp_user:root" | chpasswd && \
+ARG FTP_USER
+ARG FTP_PASSWORD
+
+RUN adduser -D -h /var/ftp ${FTP_USER} && \
+    echo "${FTP_USER}:${FTP_PASSWORD}" | chpasswd && \
     mkdir -p /var/ftp && \
-    chown -R ftp_user:ftp_user /var/ftp && \
+    chown -R ${FTP_USER}:${FTP_USER} /var/ftp && \
     chmod 755 /var/ftp
     
 CMD ["vsftpd", "/etc/vsftpd/vsftpd.conf"]
