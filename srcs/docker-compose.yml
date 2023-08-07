@@ -97,18 +97,18 @@ services:
     networks:
       - inception
     restart: always
-#  site:
-#    hostname: site
-#    build:
-#      context: ./requirements/bonus/site/.
-#      dockerfile: Dockerfile
-#    volumes:
-#      - site:/usr/share/nginx/html
-#    ports:
-#      - "3000:3000"
-#    networks:
-#      - inception
-#    restart: always
+  site:
+    hostname: site
+    build:
+      context: ./requirements/bonus/site/.
+      dockerfile: Dockerfile
+    volumes:
+      - site:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    networks:
+      - inception
+    restart: always
   cadvisor:
     hostname: cadvisor
     build:
